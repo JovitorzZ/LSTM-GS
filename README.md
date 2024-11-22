@@ -66,6 +66,29 @@ df_brasil = df_brasil.set_index('data').drop(['ano', 'mes'], axis=1)
 ```
 ![tabela2](assets/2.png)
 
+# 📊 Análise Exploratória
+
+A análise exploratória visual, por meio dos gráficos gerados, permitiu observar:
+
+![EDA](assets/5.png) ![EDA](assets/6.png)
+![EDA](assets/7.png) ![EDA](assets/8.png)
+
+## Tendência de Crescimento
+- Tanto o consumo total de energia quanto o número de consumidores residenciais apresentaram uma tendência de crescimento ao longo dos 20 anos analisados.
+- A análise visual sugere um crescimento mais pronunciado no consumo do que no número de consumidores, indicando um aumento per capita no consumo de energia residencial.
+
+## Sazonalidade
+- Os gráficos de consumo e número de consumidores mostraram flutuações sazonais, com picos em determinados meses do ano (provavelmente relacionados às mudanças climáticas e estações do ano).
+- A amplitude dessas flutuações aparenta ser maior para o consumo de energia do que para o número de consumidores.
+
+## Distribuição do Consumo
+- O histograma do consumo de energia apresentou uma distribuição possivelmente assimétrica, com uma cauda mais longa para valores maiores, indicando que existem meses com consumo significativamente acima da média.
+
+## Variação Interanual
+- O boxplot do consumo anual mostrou que o consumo médio anual tem variado ao longo dos anos, com alguns anos apresentando maior consumo e maior dispersão dos dados do que outros.
+- Isso sugere que existem fatores além da sazonalidade e do crescimento populacional que influenciam o consumo.
+
+
 ### ⚖️ **Normalização dos Dados**
 
 A normalização foi aplicada nas colunas de **consumo** e **número de consumidores** utilizando o **MinMaxScaler** para escalonar os valores entre 0 e 1. Isso ajuda a melhorar o desempenho dos modelos de redes neurais, que geralmente se beneficiam quando os dados estão em uma faixa similar. 
@@ -153,3 +176,29 @@ history = model.fit(X_train, y_train, epochs=50, batch_size=16, validation_split
 - **batch_size=16**: Define o número de amostras que serão processadas antes de o modelo atualizar seus pesos. Um `batch_size` de 16 significa que, a cada 16 amostras processadas, o modelo ajusta seus parâmetros.
 
 - **validation_split=0.1**: Esse parâmetro reserva 10% dos dados de treinamento para validação durante o treinamento. O modelo será avaliado nesse conjunto de validação a cada época para monitorar seu desempenho e evitar overfitting.
+
+## Análise
+
+![Grafico](assets/3.png)
+
+![Grafico2](assets/4.png)
+
+Os gráficos mostram que o modelo LSTM consegue prever a tendência geral do consumo de energia residencial, mas com imprecisão considerável. A previsão para os próximos 12 meses é uma extrapolação da tendência histórica e, portanto, sujeita a maior incerteza. A precisão do modelo poderia ser melhorada adicionando mais informações relevantes.
+
+## Conclusão
+### Precisão do Modelo nas Previsões Realizadas**
+O modelo, utilizando a arquitetura LSTM, demonstrou uma capacidade moderada de previsão no consumo de energia residencial. Ele conseguiu capturar bem a tendência geral e a sazonalidade dos dados, mas apresentou dificuldades em prever os picos de consumo, o que resultou em um erro quadrático médio (RMSE) relativamente alto. Isso indica que, embora o modelo tenha gerado previsões úteis para entender o comportamento de consumo ao longo do tempo, ele ainda precisa de refinamentos para ser aplicável a cenários críticos que exigem maior precisão nas previsões, especialmente em relação a flutuações extremas no consumo.
+
+### Importância do Número de Consumidores como Variável Adicional
+A variável "número de consumidores" desempenha um papel crucial na melhoria da precisão das previsões. Essa variável pode oferecer uma visão mais detalhada sobre a demanda de energia, pois o número de consumidores está diretamente relacionado ao volume total de consumo. Ao incluir essa variável no modelo, é possível capturar de maneira mais precisa a variação no consumo em função da quantidade de consumidores, ajudando a modelar de forma mais eficaz os picos e quedas no consumo.
+
+### Sugestões para Futuras Melhorias
+Algumas sugestões para melhorar a precisão do modelo incluem:
+
+Uso de Outras Variáveis: A inclusão de variáveis adicionais, como temperatura, feriados, eventos especiais e preços de energia, pode ajudar a modelar mais detalhadamente as flutuações no consumo. Essas variáveis podem afetar diretamente o comportamento dos consumidores e são importantes para uma previsão mais precisa.
+
+Ajustes na Arquitetura da Rede: O modelo pode ser aprimorado com a adição de mais camadas LSTM ou unidades ocultas para capturar padrões mais complexos nos dados. Isso pode permitir que o modelo aprenda dependências mais sutis ao longo do tempo, melhorando a qualidade das previsões.
+
+Com essas melhorias, o modelo tem o potencial de se tornar mais robusto e preciso, oferecendo previsões mais confiáveis e úteis para a gestão e otimização do consumo de energia residencial.
+
+# Link para acessar o código
