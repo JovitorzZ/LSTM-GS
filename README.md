@@ -38,12 +38,12 @@ A filtragem foi feita da seguinte forma:
 
 ### **Etapas de Pré-processamento**  
 
-1. **Filtragem por Tipo de Consumo Residencial**  
+### 1. **Filtragem por Tipo de Consumo Residencial**  
    Selecionamos apenas os dados onde o tipo de consumo é classificado como "Residencial".  
    ```python
    df_residencial = df[df['tipo_consumo'] == 'Residencial']
    print(df_residencial.shape)  # (6480, 6)
-
+ ```
 ### **2. Agregação Mensal dos Dados**  
 
 Para facilitar a análise e modelagem, os dados foram agrupados por **ano** e **mês**, somando o consumo total e o número de consumidores. 
@@ -186,7 +186,7 @@ history = model.fit(X_train, y_train, epochs=50, batch_size=16, validation_split
 Os gráficos mostram que o modelo LSTM consegue prever a tendência geral do consumo de energia residencial, mas com imprecisão considerável. A previsão para os próximos 12 meses é uma extrapolação da tendência histórica e, portanto, sujeita a maior incerteza. A precisão do modelo poderia ser melhorada adicionando mais informações relevantes.
 
 ## Conclusão
-### Precisão do Modelo nas Previsões Realizadas**
+### Precisão do Modelo nas Previsões Realizadas
 O modelo, utilizando a arquitetura LSTM, demonstrou uma capacidade moderada de previsão no consumo de energia residencial. Ele conseguiu capturar bem a tendência geral e a sazonalidade dos dados, mas apresentou dificuldades em prever os picos de consumo, o que resultou em um erro quadrático médio (RMSE) relativamente alto. Isso indica que, embora o modelo tenha gerado previsões úteis para entender o comportamento de consumo ao longo do tempo, ele ainda precisa de refinamentos para ser aplicável a cenários críticos que exigem maior precisão nas previsões, especialmente em relação a flutuações extremas no consumo.
 
 ### Importância do Número de Consumidores como Variável Adicional
@@ -201,4 +201,6 @@ Ajustes na Arquitetura da Rede: O modelo pode ser aprimorado com a adição de m
 
 Com essas melhorias, o modelo tem o potencial de se tornar mais robusto e preciso, oferecendo previsões mais confiáveis e úteis para a gestão e otimização do consumo de energia residencial.
 
-# Link para acessar o código
+# Jupyter Notebook
+
+Para acessar o notebook clique no link: [GS_RN.ipynb](GS_RN.ipynb)
